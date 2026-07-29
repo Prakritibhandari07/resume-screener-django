@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: 80px auto; padding: 0 20px; }
+        h1 { color: #1F3A5F; }
+        input { width: 100%; padding: 8px; margin: 8px 0; box-sizing: border-box; }
+        button { background: #1F3A5F; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
+        .error { color: red; font-size: 0.9em; }
+        p.signup-link { text-align: center; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h1>Log In</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <label>{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+                <p class="error">{{ field.errors }}</p>
+            {% endif %}
+        {% endfor %}
+        <button type="submit">Log In</button>
+    </form>
+    <p class="signup-link">Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+</body>
+</html>

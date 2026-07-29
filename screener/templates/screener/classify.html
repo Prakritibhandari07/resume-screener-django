@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Screening Tool</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #1F3A5F; }
+        nav a { margin-right: 15px; color: #1F3A5F; text-decoration: none; font-weight: bold; }
+        textarea, input[type="file"] { width: 100%; padding: 8px; margin: 8px 0; box-sizing: border-box; }
+        button { background: #1F3A5F; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .result { margin-top: 20px; padding: 15px; background: #eef4ff; border-left: 4px solid #1F3A5F; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'classify_resume' %}">Classify Resume</a>
+        <a href="{% url 'history' %}">My History</a>
+        <a href="{% url 'logout' %}">Logout ({{ user.username }})</a>
+    </nav>
+
+    <h1>📄 Resume Screening Tool</h1>
+    <p>Upload a resume file or paste text below to predict its job category.</p>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Upload Resume (PDF or TXT):</label>
+        {{ form.resume_file }}
+
+        <label>Or paste resume text:</label>
+        {{ form.resume_text }}
+
+        {% if form.errors %}
+            <p class="error">{{ form.errors }}</p>
+        {% endif %}
+
+        <button type="submit">Classify</button>
+    </form>
+
+    {% if result %}
+        <div class="result">
+            <strong>Predicted Category:</strong> {{ result.category }}<br>
+            {% if result.confidence %}
+                <strong>Confidence:</strong> {{ result.confidence|floatformat:1 }}
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>

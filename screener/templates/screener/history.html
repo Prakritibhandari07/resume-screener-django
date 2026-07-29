@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Prediction History</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #1F3A5F; }
+        nav a { margin-right: 15px; color: #1F3A5F; text-decoration: none; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { text-align: left; padding: 10px; border-bottom: 1px solid #ddd; }
+        th { background: #f0f0f0; }
+        .empty { color: #777; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'classify_resume' %}">Classify Resume</a>
+        <a href="{% url 'history' %}">My History</a>
+        <a href="{% url 'logout' %}">Logout ({{ user.username }})</a>
+    </nav>
+
+    <h1>📊 My Prediction History</h1>
+
+    {% if predictions %}
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Resume Snippet</th>
+                <th>Predicted Category</th>
