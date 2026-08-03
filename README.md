@@ -2,6 +2,7 @@
 
 A full-stack Django web application that classifies resumes into job categories using a trained machine learning model (TF-IDF + classifier). Unlike a standalone notebook or quick Streamlit demo, this version includes user authentication and persistent prediction history backed by a database — closer to how ML models are actually deployed in production.
 
+
 ## Features
 
 - 🔐 User authentication (signup/login/logout) using Django's built-in auth system
